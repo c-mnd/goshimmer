@@ -64,6 +64,7 @@ func Start(tps uint64) {
 				tx.SetAddress(targetAddress)
 				tx.SetBranchTransactionHash(tipselection.GetRandomTip())
 				tx.SetTrunkTransactionHash(tipselection.GetRandomTip(tx.GetBranchTransactionHash()))
+				log.Infof("Trunk %s, Branch %s", tx.GetTrunkTransactionHash(), tx.GetBranchTransactionHash())
 				tx.SetTimestamp(uint(time.Now().Unix()))
 				if err := tx.DoProofOfWork(meta_transaction.MIN_WEIGHT_MAGNITUDE); err != nil {
 					log.Warn("PoW failed", err)
